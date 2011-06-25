@@ -32,7 +32,7 @@ struct heap {
 static unsigned char hsarray[HSMAXX];
 #endif
 
-static void initialize_heap(struct heap *h, int n)
+static void initialize_heap(struct heap *h, int n, int ydim)
 {
 	int i;
 
@@ -43,7 +43,7 @@ static void initialize_heap(struct heap *h, int n)
 	h->a = &hsarray[0];
 #endif
 	for (i = 1; i <= n; i++)
-		h->a[i] = (unsigned char) rand() & 0xff;
+		h->a[i] = (unsigned char) rand() % ydim;
 	h->n = n;
 	h->hsize = n;
 }
@@ -151,7 +151,7 @@ static void heap_sort(struct heap *h)
 	}
 }
 
-static void heapsort(int xdim, UNUSED int ydim, int seed)
+static void heapsort(int xdim, int ydim, int seed)
 {
 	struct heap h;
 
@@ -159,7 +159,7 @@ static void heapsort(int xdim, UNUSED int ydim, int seed)
 		xdim = HSMAXX - 1;
 
 	srand(seed);
-	initialize_heap(&h, xdim);
+	initialize_heap(&h, xdim, ydim);
 	print_heap("before sorting:", &h);
 	heap_sort(&h);
 	print_heap("after sorting:", &h);
