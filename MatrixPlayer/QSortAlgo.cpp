@@ -8,6 +8,7 @@
  */
 
 #include "QSortAlgo.h"
+#include "MatrixDef.h"
 #include "WProgram.h"
 
 
@@ -19,12 +20,10 @@ void genList(char *list, int x, int y, int seed) {
   
 }
 
-void executeQSort(int x, int y, int seed, pt2Func pf) {
-	char *board = (char*)malloc(sizeof(char)*x*y);
+void executeQSort(int x, int y, int seed) {
 	char *list = (char*)malloc(sizeof(char)*x);
 	genList((char*)list, x,y, seed);
-        qsort(board,list, x, y, 0, x-1, pf);	
-        free(board);
+        qsort(list, 0, x-1);
         free(list);	
 }
 
@@ -32,11 +31,11 @@ void executeQSort(int x, int y, int seed, pt2Func pf) {
 
 
 
-void qsort(char* board, char* list, int x, int y, int left, int right,pt2Func pf){
+void qsort(char* list, int left, int right){
  if (right > left) {
        int pivotIndex =list[right]; // select a pivotIndex in the range left ≤ pivotIndex ≤ right  
              // see Choice of pivot for possible choices
-        int pivotNewIndex = partition(board,list,x,y, left, right, pivotIndex, pf);
+        int pivotNewIndex = partition(list,x,y, left, right, pivotIndex, pf);
              // element at pivotNewIndex is now at its final position
          qsort(board, list,x,y, left, pivotNewIndex - 1,pf);
              // recursively sort elements on the left of pivotNewIndex
@@ -61,7 +60,7 @@ void qsort(char* board, char* list, int x, int y, int left, int right,pt2Func pf
             list[i]=list[storeIndex];
             list[storeIndex]=tempb;
              storeIndex++;
-                  dispBoard(board, list, x, y, pf);
+                  displayList( list, x, y);
          }
      }
      char tempc = list[storeIndex];

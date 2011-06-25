@@ -8,9 +8,8 @@
  */
 #define MAX_GEN 1500
 
-typedef void (*pt2Func)(char*);
 int hasChanged(char *ar1, char *ar2, int x, int y);
 int aliveCount (char *ar1, int x, int y);
 void fillBoard(char *ar1, int x, int y, int seed);
 char* generate(char *ar1, char *ar2, int x, int y);
-void executeCGOL(int x, int y, int seed, pt2Func pf);
+void executeCGOL(int x, int y, int seed);

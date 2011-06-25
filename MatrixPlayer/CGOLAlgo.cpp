@@ -7,6 +7,7 @@
  *
  */
 
+#include "MatrixDef.h"
 #include "CGOLAlgo.h"
 #include "WProgram.h"
 char *b1;
@@ -128,7 +129,7 @@ for (yidx=0; yidx<y; yidx++) {
 	
 }
 
-void executeCGOL(int x, int y, int seed, pt2Func pf) {
+void executeCGOL(int x, int y, int seed) {
 	b1 = (char*)malloc(sizeof(char)*x*y);
 	b2 = (char*)malloc(sizeof(char)*x*y);
 	fillBoard((char*)b1, x, y, seed);
@@ -138,7 +139,7 @@ void executeCGOL(int x, int y, int seed, pt2Func pf) {
 		b1=generate(b1,b2, x, y);
         b2 = artemp;
         // display board
-		pf(b1);
+		displayBoard(b1);
 		delay(1000);
 		if(!hasChanged(b1, b2, x, y)) {
 			delay(60000);

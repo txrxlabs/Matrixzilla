@@ -1,5 +1,6 @@
 //We always have to include the library
 #include "LedControl.h"
+#include "MatrixDef.h"
 #include "CGOLAlgo.h"
 #include "QSortAlgo.h"
 #include <stdio.h>
@@ -8,6 +9,7 @@
 #define X_SIZE 25
 #define Y_SIZE 15
 
+#define maxCount 6
 /*
  Now we need a LedControl to work with.
  ***** These pin numbers will probably not work with your hardware *****
@@ -16,27 +18,7 @@
  pin 00 is connected to LOAD 
  We have only a single MAX72XX.
  */
-/*
- this program takes a five by five input array and calculates the result to an output 
- array of the same size according to the rules of Conway's Game of Life.
- 
- Rules for Conway's Game of life
- 0. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
- 2. Any live cell with two or three live neighbours lives on to the next generation.
- 3. Any live cell with more than three live neighbours dies, as if by overcrowding.
- 4. Any dead cell with exactly three live neighbours becomes a livecell, as if by reproduction.
- 
- 
- The process is then iterated the Game of Life reaches an equilibrium state.
- */
 
-
-/* the anyalive function takes an input array, the width of the array and the length of the array
- and iterates through each element of the array and returns the total number of live cells
- this is used to end the program once the game of life reaches an equilibrium state
- */
-#define maxCount 6
-typedef void (*pt2Function)(int x, int y, int seed);
 
 
    pt2Function funcArr1[2] = {executeCGOL, executeQSort};
@@ -80,13 +62,16 @@ return val;
 }
 
 
-void displayList(char *list) {
-  for(int i=0;i<x;i++) {
-    for(int j=0;j<y;j++) {
-    *(board+(x*j)+i) = (j<list[i])?1:0;
+void displayList(char *list, int length) {
+  char *board = malloc(sizeof(char)*X_SIZE*Y_SIZE);
+  for(int i=0;i<X_SIZE;i++) {
+    for(int j=0;j<Y_SIZE;j++) {
+    *(board+(x*j)+i) = (i<length&&j<list[i])?1:0;
     
     }
   }
+  displayBoard(board);
+  free(board);
   
 }
 
