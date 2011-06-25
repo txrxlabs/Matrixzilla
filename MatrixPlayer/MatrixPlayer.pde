@@ -1,6 +1,7 @@
 //We always have to include the library
 #include "LedControl.h"
 #include "CGOLAlgo.h"
+#include "QSortAlgo.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,10 +36,10 @@
  this is used to end the program once the game of life reaches an equilibrium state
  */
 #define maxCount 6
-typedef void (*pt2Function)(int x, int y, int seed, pt2Func);
+typedef void (*pt2Function)(int x, int y, int seed);
 
 
-   pt2Function funcArr1[1] = {executeCGOL};
+   pt2Function funcArr1[2] = {executeCGOL, executeQSort};
 
 LedControl lc=LedControl(12,11,10,maxCount);
 
@@ -77,7 +78,18 @@ for(int i=0;i<len;i++) {
 }
 return val;
 }
-/*
+
+
+void displayList(char *list) {
+  for(int i=0;i<x;i++) {
+    for(int j=0;j<y;j++) {
+    *(board+(x*j)+i) = (j<list[i])?1:0;
+    
+    }
+  }
+  
+}
+
 
 
 /*
@@ -124,7 +136,7 @@ for(int k=0;k<7;k++) {
 }
 
 void loop() { 
-      funcArr1[0](X_SIZE, Y_SIZE, analogRead(0), &displayBoard);
-        
+      funcArr1[0](X_SIZE, Y_SIZE, analogRead(0));
+      funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
  
 }
