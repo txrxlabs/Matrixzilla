@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "WProgram.h"
 
 #include "MatrixDef.h"
 
@@ -43,7 +44,7 @@ static void initialize_heap(struct heap *h, int n, int ydim)
 	h->a = &hsarray[0];
 #endif
 	for (i = 1; i <= n; i++)
-		h->a[i] = (unsigned char) rand() % ydim;
+		h->a[i] = (unsigned char) random(ydim);
 	h->n = n;
 	h->hsize = n;
 }
@@ -148,6 +149,7 @@ static void heap_sort(struct heap *h)
 		h->hsize = heapsize(h) - 1;
 		max_heapify(h, 1);
 		displayList((char *) h->a, length(h));
+		delay(10);
 	}
 }
 
@@ -158,7 +160,7 @@ static void heapsort(int xdim, int ydim, int seed)
 	if (xdim > HSMAXX - 1)
 		xdim = HSMAXX - 1;
 
-	srand(seed);
+	randomSeed(seed);
 	initialize_heap(&h, xdim, ydim);
 	print_heap("before sorting:", &h);
 	heap_sort(&h);
