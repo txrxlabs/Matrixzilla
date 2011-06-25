@@ -20,6 +20,7 @@
 #endif
 
 #define HSMAXX 26
+#define HS_USE_MALLOC 0
 
 struct heap {
 	unsigned char *a;
@@ -27,26 +28,37 @@ struct heap {
 	unsigned char hsize; /* size of heap */
 };
 
+#if !HS_USE_MALLOC
 static unsigned char hsarray[HSMAXX];
+#endif
 
 static void initialize_heap(struct heap *h, int n)
 {
 	int i;
 
-	// h->a = malloc(sizeof(h->a[0]) * n);
-	// h->a--; /* make it a 1 based array to make heapsort easier */
+#if HS_USE_MALLOC
+	h->a = malloc(sizeof(h->a[0]) * n);
+	h->a--; /* make it a 1 based array to make heapsort easier */
+#else
 	h->a = &hsarray[0];
+#endif
 	for (i = 1; i <= n; i++)
 		h->a[i] = (unsigned char) rand() & 0xff;
 	h->n = n;
 	h->hsize = n;
 }
 
+#if HS_USE_MALLOC
 static void free_heap(struct heap *h)
 {
 	h->a++; /* back to zero based before freeing */
 	free(h->a);
 }
+#else
+static void free_heap(UNUSED struct heap *h)
+{
+}
+#endif
 
 static void print_heap(DEBUG_PARM char *title, DEBUG_PARM struct heap *h)
 {
