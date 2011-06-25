@@ -21,7 +21,7 @@
 
 
 
-   pt2Function funcArr1[2] = {executeCGOL, executeQSort};
+   pt2Function funcArr1[2] = {executeQSort,executeCGOL};
 
 LedControl lc=LedControl(12,11,10,maxCount);
 
@@ -83,7 +83,16 @@ void displayList(char *list, int length) {
  four 7-Segment digits. otherwise it won't really look that good.
  */
 void displayBoard(char *board) {
-   for(int i=0;i<maxCount;i++) {
+  
+  int iy,ix;
+  
+/*  for(iy=0; iy<Y_SIZE;iy++) {
+    for(ix=0;ix<X_SIZE;ix++) {
+   Serial.print(*(board+(iy*X_SIZE)+ix),DEC);
+    }
+    Serial.println("");
+  }*/
+    for(int i=0;i<maxCount;i++) {
      lc.clearDisplay(i);
    }
  
@@ -122,6 +131,6 @@ for(int k=0;k<7;k++) {
 
 void loop() { 
       funcArr1[0](X_SIZE, Y_SIZE, analogRead(0));
-   //   funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
+      funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
  
 }

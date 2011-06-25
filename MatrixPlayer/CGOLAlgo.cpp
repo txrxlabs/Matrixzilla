@@ -135,7 +135,8 @@ void executeCGOL(int x, int y, int seed) {
 	b2 = (char*)malloc(sizeof(char)*x*y);
 	fillBoard((char*)b1, x, y, seed);
 	long itercount =0;
-	while (itercount<MAX_GEN && aliveCount(b1, x,y)<3) {
+
+	while (itercount<MAX_GEN && aliveCount(b1, x,y)>3) {
 		char *artemp = b1;
 		b1=generate(b1,b2, x, y);
         b2 = artemp;
