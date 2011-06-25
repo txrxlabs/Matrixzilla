@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
 #include <string.h>
 
 #include "MatrixDef.h"
@@ -20,18 +19,23 @@
 #define DEBUG_PARM
 #endif
 
+#define HSMAXX 26
+
 struct heap {
 	unsigned char *a;
 	unsigned char n; /* length of array */
 	unsigned char hsize; /* size of heap */
 };
 
+static unsigned char hsarray[HSMAXX];
+
 static void initialize_heap(struct heap *h, int n)
 {
 	int i;
 
-	h->a = malloc(sizeof(h->a[0]) * n);
-	h->a--; /* make it a 1 based array to make heapsort easier */
+	// h->a = malloc(sizeof(h->a[0]) * n);
+	// h->a--; /* make it a 1 based array to make heapsort easier */
+	h->a = &hsarray[0];
 	for (i = 1; i <= n; i++)
 		h->a[i] = (unsigned char) rand() & 0xff;
 	h->n = n;
@@ -131,13 +135,16 @@ static void heap_sort(struct heap *h)
 		exchange(h, 1, i);
 		h->hsize = heapsize(h) - 1;
 		max_heapify(h, 1);
-		DisplayList(h->a, length(h));
+		displayList((char *) h->a, length(h));
 	}
 }
 
 static void heapsort(int xdim, UNUSED int ydim, int seed)
 {
 	struct heap h;
+
+	if (xdim > HSMAXX - 1)
+		xdim = HSMAXX - 1;
 
 	srand(seed);
 	initialize_heap(&h, xdim);
