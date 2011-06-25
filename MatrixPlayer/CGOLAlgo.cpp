@@ -130,6 +130,7 @@ for (yidx=0; yidx<y; yidx++) {
 }
 
 void executeCGOL(int x, int y, int seed) {
+  Serial.println("executeCGOL\n");
 	b1 = (char*)malloc(sizeof(char)*x*y);
 	b2 = (char*)malloc(sizeof(char)*x*y);
 	fillBoard((char*)b1, x, y, seed);
@@ -138,7 +139,7 @@ void executeCGOL(int x, int y, int seed) {
 		char *artemp = b1;
 		b1=generate(b1,b2, x, y);
         b2 = artemp;
-        // display board
+         // display board
 		displayBoard(b1);
 		delay(1000);
 		if(!hasChanged(b1, b2, x, y)) {

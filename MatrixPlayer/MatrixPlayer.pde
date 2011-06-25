@@ -28,7 +28,7 @@ LedControl lc=LedControl(12,11,10,maxCount);
 
 
 void setup() {
- 
+ Serial.begin(9600);
   for(int i=0;i<maxCount;i++) {
     
   /*
@@ -63,10 +63,10 @@ return val;
 
 
 void displayList(char *list, int length) {
-  char *board = malloc(sizeof(char)*X_SIZE*Y_SIZE);
+  char *board = (char*)malloc(sizeof(char)*X_SIZE*Y_SIZE);
   for(int i=0;i<X_SIZE;i++) {
     for(int j=0;j<Y_SIZE;j++) {
-    *(board+(x*j)+i) = (i<length&&j<list[i])?1:0;
+    *(board+(X_SIZE*j)+i) = (i<length&&j<list[i])?1:0;
     
     }
   }
@@ -122,6 +122,6 @@ for(int k=0;k<7;k++) {
 
 void loop() { 
       funcArr1[0](X_SIZE, Y_SIZE, analogRead(0));
-      funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
+   //   funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
  
 }

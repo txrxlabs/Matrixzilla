@@ -16,14 +16,18 @@
 
 
 void genList(char *list, int x, int y, int seed) {
-
+randomSeed(seed);
+	int j;
+        for(j=0;j<x;j++) {
+		*(list+j) = random(y);
+	}
   
 }
 
 void executeQSort(int x, int y, int seed) {
 	char *list = (char*)malloc(sizeof(char)*x);
 	genList((char*)list, x,y, seed);
-        qsort(list, 0, x-1);
+        qsort(list,x,  0, x-1);
         free(list);	
 }
 
@@ -31,15 +35,15 @@ void executeQSort(int x, int y, int seed) {
 
 
 
-void qsort(char* list, int left, int right){
+void qsort(char* list, int x, int left, int right){
  if (right > left) {
        int pivotIndex =list[right]; // select a pivotIndex in the range left ≤ pivotIndex ≤ right  
              // see Choice of pivot for possible choices
-        int pivotNewIndex = partition(list,x,y, left, right, pivotIndex, pf);
+        int pivotNewIndex = partition(list,x, left, right, pivotIndex);
              // element at pivotNewIndex is now at its final position
-         qsort(board, list,x,y, left, pivotNewIndex - 1,pf);
+         qsort(list,x, left, pivotNewIndex - 1);
              // recursively sort elements on the left of pivotNewIndex
-         qsort(board, list,x,y, pivotNewIndex + 1, right,pf);
+         qsort(list,x, pivotNewIndex + 1, right);
              // recursively sort elements on the right of pivotNewIndex
      }
      }
@@ -47,12 +51,12 @@ void qsort(char* list, int left, int right){
      // left is the index of the leftmost element of the array
   // right is the index of the rightmost element of the array (inclusive)
   //   number of elements in subarray: right-left+1
-  int partition(char* board, char*list, int x, int y, int left, int right, int pivotIndex, pt2Func pf) {
+  int partition(char*list, int x, int left, int right, int pivotIndex) {
      int pivotValue = list[pivotIndex];
      char tempa = list[pivotIndex];
      list[pivotIndex] = list[right];
      list[right]=tempa;  // Move pivot to end
-     dispBoard(board, list, x, y, pf);
+     displayList( list, x);
      int storeIndex = left;
      for(int i=left;i<right;i++) {// left ≤ i < right
          if(list[i] < pivotValue) {
@@ -60,13 +64,13 @@ void qsort(char* list, int left, int right){
             list[i]=list[storeIndex];
             list[storeIndex]=tempb;
              storeIndex++;
-                  displayList( list, x, y);
+                  displayList( list, x);
          }
      }
      char tempc = list[storeIndex];
     list[storeIndex]=list[right];  // Move pivot to its final place
     list[right]=tempc;
-         dispBoard(board, list, x, y, pf);
+                          displayList( list, x);
      return storeIndex;
   }
   

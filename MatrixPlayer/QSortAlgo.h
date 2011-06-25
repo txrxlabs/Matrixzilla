@@ -8,11 +8,14 @@
  */
 #define MAX_GEN 1500
 
-void genList(char *list, int x, int y, int seed);
+
+
+
+void genList(char *list, int x, int seed);
 void executeQSort(int x, int y, int seed);
-void qsort(char* board, char* list, int x, int y, int left, int right);
-int partition(char* board, char*list, int x, int y, int left, int right, int pivotIndex) ;
-  
-  
+void qsort(char* list, int x, int left, int right);
+int partition(char*list, int x, int left, int right, int pivotIndex);
+     
+     
      
      
