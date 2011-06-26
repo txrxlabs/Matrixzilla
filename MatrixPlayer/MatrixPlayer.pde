@@ -5,6 +5,7 @@
 #include "QSortAlgo.h"
 #include "explosion.h"
 #include "heapsort.cpp"
+#include "cube.cpp"
 
 #define X_SIZE 25
 #define Y_SIZE 15
@@ -23,7 +24,7 @@
 
 
 
-pt2Function funcArr1[] = {heapsort, executeQSort, executeCGOL, explosion};
+pt2Function funcArr1[] = {heapsort, executeQSort, executeCGOL, explosion, docube};
 
 LedControl lc=LedControl(12,11,10,maxCount);
 
@@ -136,5 +137,6 @@ void loop() {
       funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
       funcArr1[2](X_SIZE, Y_SIZE, analogRead(0));
       funcArr1[3](X_SIZE, Y_SIZE, analogRead(0));
+      funcArr1[4](X_SIZE, Y_SIZE, analogRead(0));
  
 }
