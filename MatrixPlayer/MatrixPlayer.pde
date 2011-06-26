@@ -3,6 +3,7 @@
 #include "MatrixDef.h"
 #include "CGOLAlgo.h"
 #include "QSortAlgo.h"
+#include "explosion.h"
 #include "heapsort.cpp"
 
 #define X_SIZE 25
@@ -22,7 +23,7 @@
 
 
 
-pt2Function funcArr1[3] = {heapsort, executeQSort, executeCGOL};
+pt2Function funcArr1[] = {heapsort, executeQSort, executeCGOL, explosion};
 
 LedControl lc=LedControl(12,11,10,maxCount);
 
@@ -134,5 +135,6 @@ void loop() {
       funcArr1[0](X_SIZE, Y_SIZE, analogRead(0));
       funcArr1[1](X_SIZE, Y_SIZE, analogRead(0));
       funcArr1[2](X_SIZE, Y_SIZE, analogRead(0));
+      funcArr1[3](X_SIZE, Y_SIZE, analogRead(0));
  
 }
