@@ -24,6 +24,7 @@ void displayList(char *list, int length);
  * to display at coords X, Y, set:  board[X + Y * x] = 1;
  * 0 = off, anything else = on.
  */
+extern char *board;
 void displayBoard(char *board);
 
 /* draw a line on the board from (x1,y1) to (x2,y2) */
