@@ -26,6 +26,11 @@ void displayList(char *list, int length);
  */
 void displayBoard(char *board);
 
+/* draw a line on the board from (x1,y1) to (x2,y2) */
+void bline(char *board, int x1, int y1, int x2, int y2);
+
+/* plot a point on the board at (x,y) */
+void plot(char *board, int x, int y);
 
 
 

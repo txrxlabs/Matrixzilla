@@ -8,6 +8,8 @@
 #define X_SIZE 25
 #define Y_SIZE 15
 
+#include "bline.c"
+
 #define maxCount 6
 /*
  Now we need a LedControl to work with.
