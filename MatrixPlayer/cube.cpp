@@ -8,10 +8,11 @@
 static int xdim;
 static int ydim;
 
-static float ez = 15.0;
+// static float ez = 15.0;
+static float ez = 10.0;
 
-static float cubescale = 7.0;
-// static float cubescale = 10.0;
+static float cubescale = 8.0;
+// static float cubescale = 12.0;
 
 #define ARRAYSIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
@@ -31,9 +32,9 @@ struct point {
 struct point cubept3[ARRAYSIZE(cubept2)];
 struct point cubept[ARRAYSIZE(cubept2)];
 
-static float cubetransx = 15.0;
-static float cubetransy = 9.0;
-static float cubetransz = 30.0;
+static float cubetransx = 0;
+static float cubetransy = 0;
+static float cubetransz = 25.0;
 
 char cube[] = { 0, 1, 2, 3, 0, 4, 5, 6, 7, 4,
 		-1, 7, 3, -1, 2, 6, -1, 5, 1, -1};
@@ -84,8 +85,10 @@ void orthographic(float x, float y, float z, float *dx, float *dy)
 
 void perspective(float x, float y, float z, float *dx, float *dy)
 {
-	*dx = (xdim / 2.0) + (ez / z) * (x - (xdim/2.0));
-	*dy = (ydim / 2.0) + (ez / z) * (y - (ydim/2.0));
+	// *dx = (xdim / 2.0) + (ez / z) * (x - (xdim/2.0));
+	// *dy = (ydim / 2.0) + (ez / z) * (y - (ydim/2.0));
+	*dx = (xdim / 2.0) + (ez / z) * (x);
+	*dy = (ydim / 2.0) + (ez / z) * (y);
 }
 
 static void (*projection)(float x, float y, float z, float *dx, float *dy) =
@@ -160,10 +163,10 @@ void docube(char *board, int x, int y, int seed)
 #endif
 		yrotate(cubept2, cubept3, ARRAYSIZE(cubept), PI * angle / 180.0);
 		zrotate(cubept3, cubept, ARRAYSIZE(cubept), PI * angle2 / 180.0);
-		angle2 += 1;
+		angle2 += 2;
 		if (angle2 > 360)
 			angle2 = 0;
-		angle += 2;
+		angle += 3;
 		if (angle > 360)
 			angle = 0;
 	}

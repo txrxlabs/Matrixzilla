@@ -31,7 +31,7 @@ char getrandom(char x);
 #define random(x) getrandom((x))
 
 #include "bline.c"
-#include "cube.c"
+#include "cube.cpp"
 
 char getrandom(char x)
 {
