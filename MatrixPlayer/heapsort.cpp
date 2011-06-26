@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include <string.h>
 #include "WProgram.h"
 
@@ -97,7 +97,7 @@ static int parent(int i)
 }
 #endif
 
-int left(int i)
+static int left(int i)
 {
 	return 2 * i;
 }
@@ -149,7 +149,7 @@ static void heap_sort(struct heap *h)
 		h->hsize = heapsize(h) - 1;
 		max_heapify(h, 1);
 		displayList((char *) h->a, length(h));
-		delay(10);
+		delay(500);
 	}
 }
 

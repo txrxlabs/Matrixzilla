@@ -3,8 +3,7 @@
 #include "MatrixDef.h"
 #include "CGOLAlgo.h"
 #include "QSortAlgo.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "heapsort.cpp"
 
 #define X_SIZE 25
 #define Y_SIZE 15
@@ -21,7 +20,7 @@
 
 
 
-pt2Function funcArr1[2] = {heapsort, executeQSort, executeCGOL};
+pt2Function funcArr1[3] = {heapsort, executeQSort, executeCGOL};
 
 LedControl lc=LedControl(12,11,10,maxCount);
 

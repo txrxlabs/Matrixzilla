@@ -37,7 +37,7 @@ void executeQSort(int x, int y, int seed) {
 
 void qsort(char* list, int x, int left, int right){
  if (right > left) {
-       int pivotIndex =list[right]; // select a pivotIndex in the range left ≤ pivotIndex ≤ right  
+       int pivotIndex =right; // select a pivotIndex in the range left ≤ pivotIndex ≤ right  
              // see Choice of pivot for possible choices
         int pivotNewIndex = partition(list,x, left, right, pivotIndex);
              // element at pivotNewIndex is now at its final position
@@ -57,6 +57,7 @@ void qsort(char* list, int x, int left, int right){
      list[pivotIndex] = list[right];
      list[right]=tempa;  // Move pivot to end
      displayList( list, x);
+     delay(500);
      int storeIndex = left;
      for(int i=left;i<right;i++) {// left ≤ i < right
          if(list[i] < pivotValue) {
@@ -65,12 +66,14 @@ void qsort(char* list, int x, int left, int right){
             list[storeIndex]=tempb;
              storeIndex++;
                   displayList( list, x);
+                       delay(500);
          }
      }
      char tempc = list[storeIndex];
     list[storeIndex]=list[right];  // Move pivot to its final place
     list[right]=tempc;
                           displayList( list, x);
+                               delay(500);
      return storeIndex;
   }
   
