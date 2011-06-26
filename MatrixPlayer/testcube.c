@@ -5,7 +5,9 @@
 
 // char myboard[25*15];
 
-#if 0
+// #define BIGSCREEN
+
+#ifdef BIGSCREEN
 #define XDIM 79 
 #define YDIM 23
 #define X_SIZE 79

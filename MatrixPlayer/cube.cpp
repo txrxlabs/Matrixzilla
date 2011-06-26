@@ -8,11 +8,13 @@
 static int xdim;
 static int ydim;
 
-// static float ez = 15.0;
+#ifndef BIGSCREEN
 static float ez = 10.0;
-
 static float cubescale = 8.0;
-// static float cubescale = 12.0;
+#else
+static float ez = 18.0;
+static float cubescale = 7.5;
+#endif
 
 #define ARRAYSIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
@@ -69,6 +71,21 @@ static void zrotate(struct point *p1, struct point *p2, int npoints, float angle
 		p2[i].x = p1[i].x * cosa - p1[i].y * sina;
 		p2[i].y = p1[i].x * sina + p1[i].y * cosa;
 		p2[i].z = p1[i].z;
+	}
+}
+
+static void xrotate(struct point *p1, struct point *p2, int npoints, float angle)
+{
+	int i;
+	float cosa, sina;
+
+	cosa = cos(angle);
+	sina = sin(angle);
+
+	for (i = 0; i < npoints; i++) {
+		p2[i].y = p1[i].y * cosa - p1[i].z * sina;
+		p2[i].z = p1[i].y * sina + p1[i].z * cosa;
+		p2[i].x = p1[i].x;
 	}
 }
 
@@ -140,8 +157,9 @@ void docube(char *board, int x, int y, int seed)
 	randomSeed(seed);
 	float zvel = 1.0;
 	float xvel = 1.0;
-	int angle = 0;
-	int angle2 = 0;
+	float angle = 0;
+	float angle2 = 0;
+	float angle3 = 0;
 
 	memcpy(&cubept, &cubept2, sizeof(cubept2));
 
@@ -161,14 +179,18 @@ void docube(char *board, int x, int y, int seed)
 		if (cubetransx < -25)
 			xvel = 0.9;
 #endif
-		yrotate(cubept2, cubept3, ARRAYSIZE(cubept), PI * angle / 180.0);
-		zrotate(cubept3, cubept, ARRAYSIZE(cubept), PI * angle2 / 180.0);
-		angle2 += 2;
+		yrotate(cubept2, cubept, ARRAYSIZE(cubept), PI * angle / 180.0);
+		zrotate(cubept, cubept3, ARRAYSIZE(cubept), PI * angle2 / 180.0);
+		xrotate(cubept3, cubept, ARRAYSIZE(cubept), PI * angle2 / 180.0);
+		angle2 += 2.9;
 		if (angle2 > 360)
 			angle2 = 0;
-		angle += 3;
+		angle += 2.7;
 		if (angle > 360)
 			angle = 0;
+		angle3 += 1.5;
+		if (angle3 > 360)
+			angle3 = 0;
 	}
 }
 
