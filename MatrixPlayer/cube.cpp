@@ -10,7 +10,7 @@ static int ydim;
 
 #ifndef BIGSCREEN
 static float ez = 10.0;
-static float cubescale = 8.0;
+static float cubescale = 11.5;
 #else
 static float ez = 18.0;
 static float cubescale = 7.5;
@@ -140,10 +140,12 @@ void draw_cube(char *board)
 		y2 = (char) ny;
 		lx = nx;
 		ly = ny;
+#if 0
 		if (x1 < 0 || x1 >= xdim || x2 < 0 || x2 >= xdim)
 			continue;
 		if (y1 < 0 || y1 >= ydim || y2 < 0 || y2 >= ydim)
 			continue;
+#endif
 		bline(board, x1, y1, x2, y2);
 	}
 }

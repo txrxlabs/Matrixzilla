@@ -6,6 +6,8 @@
 
 void plot(char *board, int x, int y)
 {
+	if (y >= Y_SIZE || y < 0 || x >= X_SIZE || x < 0)
+		return;
 	board[X_SIZE * y + x] = 1;
 }
 
