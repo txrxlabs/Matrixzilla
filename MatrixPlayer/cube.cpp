@@ -169,10 +169,12 @@ void docube(char *board, int x, int y, int seed)
 		clear_board(board);
 		draw_cube(board);
 		displayBoard(board);
-#if 0
 		cubetransz += zvel;
-		if (cubetransz > 55)
-			zvel = -0.9;
+		if (cubetransz > 35)
+			zvel = -0.4;
+		if (cubetransz < 17)
+			zvel = 0.4;
+#if 0
 		if (cubetransz < 10.0)
 			xvel = 0.9;
 		cubetransx += xvel;
