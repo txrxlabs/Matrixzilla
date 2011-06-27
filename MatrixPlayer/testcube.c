@@ -8,10 +8,10 @@
 // #define BIGSCREEN
 
 #ifdef BIGSCREEN
-#define XDIM 79 
-#define YDIM 23
-#define X_SIZE 79
-#define Y_SIZE 23
+#define XDIM 76 
+#define YDIM 21
+#define X_SIZE XDIM
+#define Y_SIZE YDIM 
 #else
 #define XDIM 25 
 #define YDIM 15
@@ -47,14 +47,21 @@ void displayBoard(char *board)
 {
 	int x, y;
 
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
+	for (x = 0; x < XDIM + 2; x++)
+		printf("-");
+	printf("\n");
 	for (y = 0; y < YDIM; y++) {
+		printf("|");
 		for (x = 0; x < XDIM; x++) {
 			printf("%c", board[y * XDIM + x] ? '#' : ' ');
 		}
-		printf("\n");
+		printf("|\n");
 	}
+	for (x = 0; x < XDIM + 2; x++)
+		printf("-");
+	printf("\n");
 	usleep(100000);	
 }
 
