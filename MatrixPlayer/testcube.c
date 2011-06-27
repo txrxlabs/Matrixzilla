@@ -51,7 +51,7 @@ void displayBoard(char *board)
 
 	for (y = 0; y < YDIM; y++) {
 		for (x = 0; x < XDIM; x++) {
-			printf("%c", board[y * XDIM + x] ? '*' : '.');
+			printf("%c", board[y * XDIM + x] ? '#' : ' ');
 		}
 		printf("\n");
 	}
